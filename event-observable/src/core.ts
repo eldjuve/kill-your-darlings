@@ -1,2 +1,2 @@
-export * from "./core/Observable";
+export * from "./core/EventObservable";
 export * from "./core/ObservableArray";

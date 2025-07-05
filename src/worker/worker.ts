@@ -102,7 +102,7 @@ const ALL_STOCKS: Stock[] = [...SP500, ...DAX, ...FTSE100];
 const state: Record<string, Snapshot> = {};
 const ports: MessagePort[] = [];
 
-let updateInterval = 10;
+let updateInterval = 1;
 let running = false;
 
 function randomBetween(min: number, max: number) {
@@ -183,6 +183,12 @@ self.onconnect = (e: MessageEvent) => {
     const msg = event.data;
     if (msg?.type === "setFrequency" && typeof msg.ms === "number") {
       updateInterval = msg.ms;
+    } else if (msg?.type === "disconnect") {
+      const index = ports.indexOf(port);
+      if (index !== -1) {
+        ports.splice(index, 1);
+      }
+      port.close();
     }
   };
 

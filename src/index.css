@@ -67,6 +67,18 @@ button:focus-visible {
   }
 }
 
+table {
+  border-collapse: collapse;
+}
+
+td {
+  border: 1px solid #a1a1a1;
+}
+
+tr:nth-child(even) {
+  background-color: #312b2b;
+}
+
 .arrow {
   position: relative;
   display: inline-block;

@@ -1,8 +1,12 @@
 import { useState, useEffect } from "react";
-import type { Observable, ObservableArray, ReadonlyObservable } from "./core";
+import type {
+  EventObservable,
+  ObservableArray,
+  ReadonlyObservable,
+} from "./core";
 
 export const useObservable = <T, E>(
-  observable: Observable<T, E> | ReadonlyObservable<T, E>,
+  observable: EventObservable<T, E> | ReadonlyObservable<T, E>,
 ) => {
   const [value, setValue] = useState(observable.getOptimisticValue());
   useEffect(() => {

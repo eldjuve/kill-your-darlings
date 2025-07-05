@@ -1,17 +1,17 @@
-import { Observable, ObservableArray } from "@event-observable/core";
+import { EventObservable, ObservableArray } from "@event-observable/core";
 import type { Message, Snapshot, Stock, StockDelta } from "../../worker/worker";
 
-const cache = new Map<string, Observable<Snapshot>>();
+const cache = new Map<string, EventObservable<Snapshot>>();
 export const stockList = new ObservableArray<Snapshot>();
 
 const cacheKey = ({ exchange, symbol }: Stock) => {
   return `${exchange}|${symbol}`;
 };
 
-export function getStockObservable(stock: Stock): Observable<Snapshot> {
+export function getStockObservable(stock: Stock): EventObservable<Snapshot> {
   const key = cacheKey(stock);
   if (!cache.has(key)) {
-    const observable = new Observable<Snapshot>();
+    const observable = new EventObservable<Snapshot>();
     cache.set(key, observable);
   }
   return cache.get(key)!;
